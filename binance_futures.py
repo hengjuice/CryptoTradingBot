@@ -16,7 +16,6 @@ logger = logging.getLogger()
 #         contracts.append(contract['pair'])
 #     return contracts
 
-#print(get_contracts())
 
 class BinanceFuturesClient:
     def __init__(self, testnet):
