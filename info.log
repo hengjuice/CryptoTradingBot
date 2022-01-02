@@ -1,0 +1,6 @@
+2022-01-02 15:54:34,399 INFO :: This is logged in all cases
+2022-01-02 15:54:34,400 INFO :: This is logged only if we execute the main.py file
+2022-01-02 15:54:36,687 INFO :: This is logged in all cases
+2022-01-02 15:54:36,687 INFO :: This is logged in all cases
+2022-01-02 15:55:04,872 INFO :: This is logged in all cases
+2022-01-02 20:43:42,390 INFO :: This is logged in all cases
