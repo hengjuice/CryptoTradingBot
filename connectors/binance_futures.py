@@ -7,6 +7,7 @@ from urllib.parse import urlencode
 import hmac
 import hashlib
 
+import websocket
 
 logger = logging.getLogger()
 
@@ -15,8 +16,10 @@ class BinanceFuturesClient:
     def __init__(self, public_key, secret_key, testnet):
         if testnet:
             self.base_url = "https://testnet.binancefuture.com"
+            self.wss_url = "wss://stream.binancefuture.com/ws"
         else:
             self.base_url = "https://fapi.binance.com"
+            self.wss_url = "wss://fstream.binance.com/ws"
 
         self.public_key = public_key
         self.secret_key = secret_key
@@ -147,3 +150,19 @@ class BinanceFuturesClient:
         order_status = self.make_request("GET", "/fapi/v1/order", data)
 
         return order_status
+
+    def start_ws(self):
+        ws = websocket.WebSocketApp(self.wss_url, on_open=self.on_open, on_close=self.on_close)
+        return
+
+    def on_open(self, ws):
+        logger.info("Binance connection opened")
+
+    def on_close(self,ws):
+        logger.warning("Binance connection closed")
+
+    def on_error(self, ws, msg):
+        logger.error("Binance connection error: %s", msg)
+
+    def on_message(self, ws, msg):
+        print(msg)
